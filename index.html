@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Target Stock Monitor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .status-box {
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 8px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .in-stock {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .out-of-stock {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .loading {
+            background-color: #e2e3e5;
+            color: #383d41;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>NeeDoh Ginger Glowman Stock Tracker</h1>
+    <div id="status" class="status-box loading">Checking inventory...</div>
+
+    <script>window.addEventListener('DOMContentLoaded', async () => {
+            const statusDiv = document.getElementById('status');
+
+            try {
+                const res = await fetch('http://localhost:3000/api/check-stock');
+                const data = await res.json();
+
+                if (data.inStock) {
+                    statusDiv.className = 'status-box in-stock';
+                    statusDiv.innerHTML = '🚨 IN STOCK! <br><a href="https://www.target.com/p/needoh-ginger-glowman-fidget-toy/-/A-95271190" target="_blank">Click Here to Buy</a>';
+                } else {
+                    statusDiv.className = 'status-box out-of-stock';
+                    statusDiv.innerText = 'Out of Stock';
+                }
+            } catch (err) {
+                statusDiv.className = 'status-box out-of-stock';
+                statusDiv.innerText = 'Error loading status';
+            }
+        });</script>
+</body>
+</html>
