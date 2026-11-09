@@ -14,7 +14,7 @@ CHECK_INTERVAL = 120  # Check every 2 minutes
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 SENDER_EMAIL = "@gmail.com"
-SENDER_PASSWORD = "wnrr qvuc ktie znlq"  # Google App Password
+SENDER_PASSWORD = ""  # Google App Password
 
 # List of email addresses to receive alerts
 RECIPIENT_EMAILS = [
